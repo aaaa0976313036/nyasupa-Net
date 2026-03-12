@@ -81,7 +81,7 @@
     </section>
 
     <section class="post">
-        <h2>想說的話：( • _ • )</h2>
+        <h2>想說的話：( > _ • )</h2>
         <p>可以把想和我分享的話留言給我，我會很開心。</p>
     </section>
 
@@ -90,6 +90,27 @@
             ⚠️ 警告：偵測到強大的精神波波動。請勿過度點擊重新整理按鈕，以免影響我的精神集中。
         </div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div style="width: 300px; margin: auto;">
+    <h2>平常愛做的事：( > _ &lt; )</h2>
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+        type: 'pie', // 設定為圓餅圖
+        data: {
+            labels: ['發呆訓練', '睡覺', '吃點心'],
+            datasets: [{
+                data: [70, 20, 10], // 這裡改數字，比例就會變
+                backgroundColor: ['#9D8BB5', '#D1D5DB', '#F3A3D3']
+            }]
+        }
+    });
+</script>
 </main>
 
 <div class="footer">

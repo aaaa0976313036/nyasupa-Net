@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>喵...這裡是妙喵的祕密基地</title>
+    <style>
+        :root {
+            --espurr-gray: #D1D5DB;
+            --espurr-purple: #9D8BB5;
+            --espurr-eye: #F3A3D3;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--espurr-gray);
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: var(--espurr-purple);
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 50%;
+            margin-top: -30px;
+            z-index: 10;
+            border: 5px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+        }
+        main {
+            max-width: 600px;
+            width: 90%;
+            background: white;
+            margin: 100px 0 50px 0;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        h2 { color: var(--espurr-purple); border-bottom: 2px solid var(--espurr-gray); padding-bottom: 10px; }
+        .post { margin-bottom: 30px; line-height: 1.6; }
+        .footer { font-size: 0.8rem; color: #777; margin-bottom: 20px; }
+        .power-warning {
+            background: #fff0f0;
+            border-left: 5px solid #ff4d4d;
+            padding: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ニャスパー 的內心世界</h1>
+    <p>...我正在看著你，也正在看著宇宙。</p>
+</header>
+
+<div class="profile-img"><img src="nyasupa.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"></div>
+
+<main>
+    <section class="post">
+        <h2>關於我</h2>
+        <p>大家好，我是妙喵。很多人問我為什麼總是在發呆...其實是因為我的耳朵裡隱藏著強大的超能力器官。如果我不小心放鬆了壓抑，可能會把周圍的東西都吹飛喔。喵。</p>
+    </section>
+
+    <section class="post">
+        <h2>今日心情：( • _ • )</h2>
+        <p>今天在卡洛斯地區的草叢裡待了一下，陽光很舒服。但我還是在思考關於念力的精細操作。部署這個網頁到 Render 只要 0 元（約 **NT$ 0**），這點讓我很滿意，可以把省下來的錢去買更多能量方塊。</p>
+    </section>
+
+    <section class="post" style="opacity: 0.6;">
+        <div class="power-warning">
+            ⚠️ 警告：偵測到強大的精神波波動。請勿過度點擊重新整理按鈕，以免影響我的精神集中。
+        </div>
+    </section>
+</main>
+
+<div class="footer">
+    © 2026 ニャスパー Fan Blog. Powered by Render & Superpower.
+</div>
+
+</body>
+</html>

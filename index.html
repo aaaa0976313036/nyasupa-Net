@@ -57,6 +57,72 @@
             border-left: 5px solid #ff4d4d;
             padding: 10px;
             font-style: italic;
+
+        
+        }
+        /* IG 風格貼文樣式 */
+        .ig-post {
+            border: 1px solid var(--espurr-gray);
+            border-radius: 12px;
+            background-color: #fff;
+            margin-bottom: 30px;
+            overflow: hidden; /* 讓圖片圓角生效 */
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+        }
+        .post-header .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 1px solid var(--espurr-purple);
+        }
+        .post-header .username {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--espurr-purple);
+        }
+        .post-image img {
+            width: 100%;
+            display: block;
+        }
+        .post-content {
+            padding: 15px;
+        }
+        .interactions {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 12px;
+            transition: transform 0.2s;
+        }
+        .icon-btn:hover { transform: scale(1.2); }
+        .likes {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .caption {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .hashtags {
+            color: var(--espurr-purple);
+            font-weight: 500;
+        }
+        .post-time {
+            color: #999;
+            font-size: 11px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -97,6 +163,35 @@
     <h2>平常愛做的事：( > _ &lt; )</h2>
     <canvas id="myChart"></canvas>
 </div>
+
+<article class="ig-post">
+        <header class="post-header">
+            <img src="head.jpg" alt="頭像" class="avatar">
+            <span class="username">nyasupa_daily</span>
+        </header>
+
+        <div class="post-image">
+            <img src="happy.jpg" alt="妙喵生活照">
+        </div>
+
+        <footer class="post-content">
+            <div class="interactions">
+                <button class="icon-btn">💖</button>
+                <button class="icon-btn">💬</button>
+                <button class="icon-btn">🔮</button>
+            </div>
+            
+            <span class="likes">9666 個讚</span>
+
+            <div class="caption">
+                <strong>nyasupa_daily</strong> 
+                今天練習用念力偷偷傳送點心，心情真美麗...喵。
+                <div class="hashtags">#妙喵 #超能力 #開心 #卡洛斯</div>
+            </div>
+
+            <div class="post-time">2 小時前  2026/03/17 10:29A.M.</div>
+        </footer>
+    </article>
 
 <script>
     const ctx = document.getElementById('myChart');

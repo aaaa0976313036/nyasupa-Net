@@ -124,6 +124,75 @@
             font-size: 11px;
             margin-top: 10px;
         }
+
+        /* 區隔區塊的樣式 */
+        .section-divider {
+            margin-top: 50px;    /* 這裡控制與上方圓餅圖的間距 */
+            margin-bottom: 20px; /* 這裡控制與下方貼文的間距 */
+            text-align: left;    /* 標題靠左，更有 IG 牆的感覺 */
+            width: 100%;
+        }
+
+        .section-title {
+            color: var(--espurr-purple);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 讓貼文卡片本身也有一點間距 */
+        .ig-post {
+            margin-top: 10px;
+            /* 原有的樣式保留... */
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* 讓名字在左，三個點在右 */
+            padding: 12px 15px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column; /* 讓名稱和地點上下排列 */
+        }
+
+        .username {
+            font-weight: 600;
+            font-size: 14px;
+            color: #fcfafa;
+            text-decoration: none;
+        }
+
+        .location {
+            font-size: 12px;
+            color: #fcfafa;
+            margin-top: 2px;
+        }
+
+        .post-options {
+            color: #fffbfb;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: var(--espurr-purple);
+        }
+        .post-header .username {
+            color: #FFFFFF !important; 
+            font-weight: 600;
+            display: inline-block; /* 確保它是區塊顯示 */
+            margin-bottom: 2px;
+        }
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 5px; /* 給名字一點左邊距 */
+        }
     </style>
 </head>
 <body>
@@ -164,34 +233,17 @@
     <canvas id="myChart"></canvas>
 </div>
 
-<article class="ig-post">
-        <header class="post-header">
-            <img src="head.jpg" alt="頭像" class="avatar">
-            <span class="username">nyasupa_daily</span>
-        </header>
+<div class="section-divider">
+    <h2 class="section-title">✨ 最新貼文</h2>
+</div>
 
-        <div class="post-image">
-            <img src="happy.jpg" alt="妙喵生活照">
-        </div>
+<div id="post-container"></div>
 
-        <footer class="post-content">
-            <div class="interactions">
-                <button class="icon-btn">💖</button>
-                <button class="icon-btn">💬</button>
-                <button class="icon-btn">🔮</button>
-            </div>
-            
-            <span class="likes">9666 個讚</span>
-
-            <div class="caption">
-                <strong>nyasupa_daily</strong> 
-                今天練習用念力偷偷傳送點心，心情真美麗...喵。
-                <div class="hashtags">#妙喵 #超能力 #開心 #卡洛斯</div>
-            </div>
-
-            <div class="post-time">2 小時前  2026/03/17 10:29A.M.</div>
-        </footer>
-    </article>
+<div id="load-more-container" style="text-align: center; margin: 20px 0;">
+    <button id="load-more-btn" style="background-color: var(--espurr-purple); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s;">
+        顯示更多喵...
+    </button>
+</div>
 
 <script>
     const ctx = document.getElementById('myChart');
@@ -205,6 +257,80 @@
             }]
         }
     });
+</script>
+
+
+<script>
+    let allPosts = [];
+    let displayedCount = 0;
+    const limit = 3; // 每次顯示幾篇
+
+    async function loadPosts() {
+        try {
+            const response = await fetch('posts.json');
+            allPosts = await response.json();
+            allPosts.reverse(); // 最新的在前面
+            
+            renderPosts(); // 第一次渲染
+        } catch (error) {
+            console.error('喵嗚！抓不到資料：', error);
+        }
+    }
+
+    function renderPosts() {
+        const container = document.getElementById('post-container');
+        const nextBatch = allPosts.slice(displayedCount, displayedCount + limit);
+        
+        const html = nextBatch.map(post => `
+            <article class="ig-post">
+                <header class="post-header" style="background-color: var(--espurr-purple);">
+                    <div class="header-left">
+                        <img src="${post.avatar}" alt="頭像" class="avatar">
+                        <div class="user-info">
+                            <span class="username">${post.username}</span>
+                            <span class="location">${post.location}</span>
+                        </div>
+                    </div>
+                    <div class="post-options">•••</div>
+                </header>
+                <div class="post-image">
+                    <img src="${post.image}" alt="貼文圖片">
+                </div>
+                <footer class="post-content">
+                    <div class="interactions">
+                        <button class="icon-btn">💖</button>
+                        <button class="icon-btn">💬</button>
+                        <button class="icon-btn">🔮</button>
+                    </div>
+                    <span class="likes">${post.likes} 個讚</span>
+                    <div class="caption">
+                        <strong>${post.username}</strong> ${post.caption}
+                        <div class="hashtags">${post.hashtags}</div>
+                    </div>
+                    <div class="post-time">${post.time}</div>
+                </footer>
+            </article>
+        `).join('');
+
+        container.insertAdjacentHTML('beforeend', html);
+        displayedCount += limit;
+
+        // 如果沒有更多文章了，就把按鈕藏起來
+        if (displayedCount >= allPosts.length) {
+            document.getElementById('load-more-container').style.display = 'none';
+        }
+    }
+
+    // 綁定按鈕點擊事件
+    document.getElementById('load-more-btn').addEventListener('click', renderPosts);
+
+    // 初始化載入
+    window.onload = loadPosts;
+</script>
+    
+
+    // 頁面載入後立即執行
+    window.onload = loadPosts;
 </script>
 </main>
 
